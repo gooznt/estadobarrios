@@ -5,7 +5,7 @@
   <title>Estado de Caminos - Dashboard</title>
   <style>
     body { font-family: sans-serif; padding: 20px; }
-    .barrio { padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; }
+    .barrio { padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: center; }
     .estado { width: 20px; height: 20px; border-radius: 50%; }
     .verde { background-color: green; }
     .amarillo { background-color: yellow; }
@@ -38,14 +38,16 @@
 
           let claseColor = '';
           if (estado.toLowerCase().includes('ok')) claseColor = 'verde';
-          else if (estado.toLowerCase().includes('deshabilitados')) claseColor = 'rojo';
+          else if (estado.toLowerCase().includes('deshabilitado')) claseColor = 'rojo';
           else claseColor = 'amarillo';
 
           const item = document.createElement('div');
           item.className = 'barrio';
           item.innerHTML = `
             <span>${barrio}</span>
-            <span class="estado ${claseColor}"></span>
+            <span>${fecha}</span>
+            <span>${cuerpo}</span>
+            </nbsp><span class="estado ${claseColor}"></span>
           `;
           container.appendChild(item);
         });
