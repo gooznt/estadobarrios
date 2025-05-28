@@ -41,13 +41,21 @@
           else if (estado.toLowerCase().includes('deshabilitado')) claseColor = 'rojo';
           else claseColor = 'amarillo';
 
+          const header = document.createElement('div');
+          header.className = 'barrio';
+          header.innerHTML = `
+            <span>Barrio</span>
+            </nbsp></nbsp><span>Fecha de actualizacion</span>
+            </nbsp></nbsp><span>Estado del acceso</span>
+          `;
+          container.appendChild(item);
+
           const item = document.createElement('div');
           item.className = 'barrio';
           item.innerHTML = `
             <span>${barrio}</span>
-            <span>${fecha}</span>
-            <span>${cuerpo}</span>
-            </nbsp><span class="estado ${claseColor}"></span>
+            </nbsp></nbsp><span>${fecha}</span>
+            </nbsp></nbsp><span class="estado ${claseColor}"></span>
           `;
           container.appendChild(item);
         });
