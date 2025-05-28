@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Estado de Caminos - Dashboard</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .barrio { padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; }
+    .estado { width: 20px; height: 20px; border-radius: 50%; }
+    .verde { background-color: green; }
+    .amarillo { background-color: yellow; }
+    .rojo { background-color: red; }
+  </style>
+</head>
+<body>
+  <h1>Estado de caminos</h1>
+  <div id="listado"></div>
+
+  <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3yBU_w_jwit366xsBsWqFUHsL99QS7qkBwyj4atg7q2EJSigcbb2LzEUv90ylAvpWL8dywD9GxW14/pub?gid=0&single=true&output=csv'; // Pegá la URL publicada acá
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(data => {
+        const filas = data.trim().split('\n').slice(1); // Ignora la cabecera
+        const container = document.getElementById('listado');
+
+        filas.forEach(fila => {
+          const [barrio, estado, cuerpo, fecha] = fila.split(',');
+
+          let claseColor = '';
+          if (estado.toLowerCase().includes('ok')) claseColor = 'verde';
+          else if (estado.toLowerCase().includes('deshabilitados')) claseColor = 'rojo';
+          else claseColor = 'amarillo';
+
+          const item = document.createElement('div');
+          item.className = 'barrio';
+          item.innerHTML = `
+            <span>${barrio}</span>
+            <span class="estado ${claseColor}"></span>
+          `;
+          container.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>
