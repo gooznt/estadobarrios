@@ -17,16 +17,24 @@
   <div id="listado"></div>
 
   <script>
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3yBU_w_jwit366xsBsWqFUHsL99QS7qkBwyj4atg7q2EJSigcbb2LzEUv90ylAvpWL8dywD9GxW14/pubhtml?gid=0&single=true'; // Pegá la URL publicada acá
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3yBU_w_jwit366xsBsWqFUHsL99QS7qkBwyj4atg7q2EJSigcbb2LzEUv90ylAvpWL8dywD9GxW14/pubhtml?gid=0&single=true';
 
     fetch(sheetUrl)
       .then(res => res.text())
-      .then(data => {
-        const filas = data.trim().split('\n').slice(1); // Ignora la cabecera
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const rows = doc.querySelectorAll('table tbody tr');
         const container = document.getElementById('listado');
 
-        filas.forEach(fila => {
-          const [barrio, estado, cuerpo, fecha] = fila.split(',');
+        rows.forEach((row, index) => {
+          if (index === 0) return; // Saltear encabezado
+          const celdas = row.querySelectorAll('td');
+          const barrio = celdas[0]?.innerText.trim();
+          const estado = celdas[1]?.innerText.trim();
+          const cuerpo = celdas[2]?.innerText.trim();
+          const fecha = celdas[3]?.innerText.trim();
 
           let claseColor = '';
           if (estado.toLowerCase().includes('ok')) claseColor = 'verde';
@@ -45,4 +53,3 @@
   </script>
 </body>
 </html>
-
