@@ -15,7 +15,7 @@
     <div class="encabezado">
       <span>Barrio</span>
       <span>Estado</span>
-      <span>Actualizado</span>
+      <span>Reportado</span>
       <span>GPS</span>
     </div>
     <div id="listado">
@@ -25,7 +25,7 @@
 <div class="footer">
   <div><a href="https://docs.google.com/forms/d/e/1FAIpQLSd9K88VDN1_xipPo7S05iuM6v0_D_V4-wiHGKkqgziAq0QyEw/viewform?usp=dialog" target="_blank">Dejanos tu comentario</a></div>
   <hr style="width: 25%">
-  <div title="los horarios de actualización pueden variar">Actualizado automáticamente (*)</div>
+  <div title="La frecuencia de actualización puede variar según el dia y la hora">(*) Actualizado <span id="fechaActualizacion">-</span></div>
 </div>
 
 
@@ -46,7 +46,8 @@
           const celdas = row.querySelectorAll('td');
           const barrio = celdas[0]?.innerText.trim();
           const estado = celdas[1]?.innerText.trim();
-          const fecha = celdas[3]?.innerText.trim();
+          const fechaActualizacion = celdas[3]?.innerText.trim();
+          const fechaComunicado = celdas[4]?.innerText.trim();
           const gps = celdas[5]?.innerText.trim();
 
           let claseColor = 'amarillo';
@@ -58,10 +59,13 @@
           item.innerHTML = `
             <span>${barrio}</span>
             <span class="estado ${claseColor}">${estado}</span>
-            <span class="fecha">${fecha}</span>
+            <span class="fecha">${fechaComunicado}</span>
             <span class="gps"><a href="${gps}" target="_blank">ir</a></span>
           `;
           container.appendChild(item);
+
+          const actualizacion = document.getElementById('fechaActualizacion');
+          actualizacion.innerHTML = `${fechaActualizacion}`;
         });
       });
   </script>
