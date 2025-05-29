@@ -93,7 +93,7 @@
       <span>Barrio</span>
       <span>Estado</span>
       <span>Fecha</span>
-      <span>Dirección</span>
+      <span>GPS</span>
     </div>
     <div id="listado">
       <!-- barrios cargados dinámicamente -->
@@ -124,7 +124,7 @@
           const barrio = celdas[0]?.innerText.trim();
           const estado = celdas[1]?.innerText.trim();
           const fecha = celdas[3]?.innerText.trim();
-          const direccion = celdas[5]?.innerText.trim();
+          const gps = celdas[5]?.innerText.trim();
 
           let claseColor = 'amarillo';
           if (estado.toLowerCase().includes('ok')) claseColor = 'verde';
@@ -136,7 +136,8 @@
             <span>${barrio}</span>
             <span class="estado ${claseColor}">${estado}</span>
             <span class="fecha">${fecha}</span>
-            <span>${direccion}</span>
+            <span><a href="${gps}" target="_blank">mapa :truck:</a></div>
+  ${direccion}</span>
           `;
           container.appendChild(item);
         });
