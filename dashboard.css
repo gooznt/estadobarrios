@@ -18,8 +18,8 @@ h1 {
   font-size: 24px;
 }
 .container {
-  max-width: 900px;
-  margin: 30px auto;
+  max-width: 90%;
+  margin: 1% auto;
   padding: 0 20px;
 }
 .encabezado {
